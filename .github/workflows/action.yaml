@@ -1,7 +1,8 @@
 name: action
 on:
   schedule:
-  - cron: '0,15,30,45 * * * *'
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*/15 * * * *'
   
 jobs:
   job1:
