@@ -21,7 +21,7 @@ jobs:
           python3 eth-price-check.py
           git config --global user.email "foobar@foobar.com"
           git config --global user.name "foobar"
-          git diff --quiet; RESULT=$?; if [ $RESULT -eq 1 ]; then git add ath.eth; git commit -m "Update ATH!"; fi
+          git diff --quiet || RESULT=$?; if [ $RESULT -eq 1 ]; then git add ath.eth; git commit -m "Update ATH!"; fi
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
