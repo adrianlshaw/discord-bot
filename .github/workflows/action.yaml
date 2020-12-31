@@ -1,0 +1,31 @@
+name: action
+on:
+        push:
+        schedule:
+           - cron: '*/15 * * * *'
+  
+jobs:
+  job1:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/setup-python@v1
+      - uses: actions/checkout@v2
+      - name: Run
+        shell: bash
+        env:
+                COIN_SECRET: ${{ secrets.COIN_SECRET }}
+                DISCORD_SECRET: ${{ secrets.DISCORD_SECRET }}
+                GIT_TRACE: 1
+        run: |
+          pip3 install requests
+          python3 eth-price-check.py
+          git config --global user.email "foobar@foobar.com"
+          git config --global user.name "foobar"
+          git add ath.eth
+          git commit -m "Update ATH!"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
