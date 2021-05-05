@@ -14,7 +14,7 @@ def check_price(ticker):
 
 	# Post the message to the Discord webhook
 	data = {
-	    "content": str(ticker.upper()) + " price is $" + str(price_in_usd) + " USD!"  
+                "content": str(ticker.upper()) + " :" + str(ticker.lower()) + ": price is $" + str(price_in_usd) + " USD!"  
 	}
 
 	price_in_usd = str(price_in_usd).replace(',','')
