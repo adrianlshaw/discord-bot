@@ -8,7 +8,7 @@ def check_price(ticker):
 
     # Get the ETH price
 
-    if ticket != "btc":
+    if ticker != "btc":
         eth_price_url = 'https://www.worldcoinindex.com/apiservice/ticker?key=' + \
             api_key + '&label=' + ticker + 'btc&fiat=usd'
         data = requests.get(eth_price_url).json()
