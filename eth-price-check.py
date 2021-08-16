@@ -6,11 +6,16 @@ import sys
 def check_price(ticker):
 
 	# Get the ETH price 
-	eth_price_url = 'https://www.worldcoinindex.com/apiservice/ticker?key=' + api_key + '&label=' + ticker + 'btc&fiat=usd'  
 
-	data = requests.get(eth_price_url).json()
-	print(str(data))
-	price_in_usd = data['Markets'][0]['Price']
+        if ticket != "btc":
+	    eth_price_url = 'https://www.worldcoinindex.com/apiservice/ticker?key=' + api_key + '&label=' + ticker + 'btc&fiat=usd'  
+	    data = requests.get(eth_price_url).json()
+	    print(str(data))
+	    price_in_usd = data['Markets'][0]['Price']
+        else:
+            bitcoin_price_url = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
+            data = requests.get(bitcoin_price_url).json()
+            price_in_usd = data['bpi']['USD']['rate']
 
 	# Post the message to the Discord webhook
 	data = {
@@ -60,3 +65,4 @@ if (api_key is None) or (api_key == ""):
 
 check_price("eth")
 check_price("ltc")
+check_price("btc")
